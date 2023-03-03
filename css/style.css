@@ -1,0 +1,23 @@
+body {
+	display:flex;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.square {
+	transition: 400ms ease;
+}
+
+/* .sidebar { */
+/* 	height: 100vw; */
+/* } */
+/**/
+/* input { */
+/* 	margin: 0; */
+/* 	padding: 0; */
+/* 	border: 0; */
+/* 	height: 4vw; */
+/* 	width: 3vw; */
+/* 	transform: rotate(270deg); */
+/* } */
