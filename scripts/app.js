@@ -57,10 +57,28 @@ function newGrid(nGrid) {
 	createGrid(nGrid);
 }
 
-createGrid(4);
+
+function popup() {
+	event.preventDefault();
+	if (menu.style.visibility !== "visible") {
+		menu.style.visibility = "visible";
+	} else menu.style.visibility = "hidden";
+	// let menu = document.createElement('div');
+	// menu.className = "floating-menu";
+	// document.getElementsByClassName('container-m')[0].appendChild(menu);	
+}
+
+createGrid(64);
 
 let squares = document.getElementsByClassName('square');
-
+let menu = document.getElementsByClassName('floating-menu')[0];	
 let drawing = false;
-// document.addEventListener('mouseover', draw);
+
 document.addEventListener('click', toggle);
+document.addEventListener('contextmenu', popup);
+
+rButton = document.getElementById('reset');
+rButton.addEventListener('click', reset);
+cButton = document.getElementById('change');
+cButton.addEventListener('click', newGrid);
+
