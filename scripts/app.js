@@ -1,27 +1,30 @@
-let grid = document.getElementsByClassName("container-m")[0];
-grid.style = "width: 100vw; height: 100vw;"
 
-let gridSize = 64;
-let squareSize = 100/gridSize;
+const index = document.body.innerHTML;
 
-for (i=0;i<gridSize;i++) {
-	let container = document.createElement('div');
-	container.style = "display: flex; width: 100%;";
-	container.className = i;
-	grid.appendChild(container);
+function createGrid(nGrid = 16) {
+	let gridSize = nGrid;
+	let squareSize = 100/gridSize;
+	let grid = document.getElementsByClassName("container-m")[0];
+	grid.style = "width: 100vw; height: 100vw;"
 
-	for (j=0;j<gridSize;j++) {
-		let div = document.createElement('div');
-		div.className = "square";
-		div.style = `height: ${squareSize}vw; width: ${squareSize}vw;`
-		document.getElementsByClassName(i)[0].appendChild(div);
+	for (let i=0;i<gridSize;i++) {
+		let container = document.createElement('div');
+		container.style = "display: flex; width: 100%;";
+		container.className = "container";
+		container.id = i;
+		grid.appendChild(container);
+
+		for (let j=0;j<gridSize;j++) {
+			let div = document.createElement('div');
+			div.className = "square";
+			div.style = `height: ${squareSize}vw; width: ${squareSize}vw;`
+			document.getElementById(i).appendChild(div);
+		}
 	}
 }
 
-let squares = document.getElementsByClassName('square');
-
 function changeBg (element) {
-	element.style.backgroundColor = 'lightcyan';
+	element.style.backgroundColor = 'lightcoral';
 	// element.style.border = "0.1px solid cyan";
 }
 
@@ -32,16 +35,31 @@ function draw(event) {
 		changeBg(event.target);
 	}
 }
+
 function toggle() {
 	if (drawing && event.target.matches('.square')) {
 		drawing = false;
 		document.removeEventListener('mouseover', draw);
 	} else if (event.target.matches('.square')) {
-		drawing = true;
 		document.addEventListener('mouseover', draw);
+		drawing = true;
 	}
 }
 
+function reset() {
+	for (let square of squares) {
+		square.style.backgroundColor = "transparent";
+	}
+}
+
+function newGrid(nGrid) {
+	document.body.innerHTML = index;
+	createGrid(nGrid);
+}
+
+createGrid(4);
+
+let squares = document.getElementsByClassName('square');
 
 let drawing = false;
 // document.addEventListener('mouseover', draw);

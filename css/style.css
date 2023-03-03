@@ -8,8 +8,7 @@ body {
 }
 
 .square {
-	transition: 400ms ease;
-	transform: rotate(360deg);
+	/* transition: 800ms ease; */
 	box-sizing: border-box;
 }
 
