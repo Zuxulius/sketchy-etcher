@@ -21,7 +21,8 @@ for (i=0;i<gridSize;i++) {
 let squares = document.getElementsByClassName('square');
 
 function changeBg (element) {
-	element.style.backgroundColor = "black";
+	element.style.backgroundColor = 'lightcyan';
+	// element.style.border = "0.1px solid cyan";
 }
 
 // https://gomakethings.com/why-you-shouldnt-attach-event-listeners-in-a-for-loop-with-vanilla-javascript/

@@ -3,10 +3,14 @@ body {
 	margin: 0;
 	padding: 0;
 	border: 0;
+	background: rgb(67,34,195);
+	background: radial-gradient(circle, rgba(67,34,195,0.08869485294117652) 0%, rgba(236,253,45,0.20073967086834732) 100%);;
 }
 
 .square {
 	transition: 400ms ease;
+	transform: rotate(360deg);
+	box-sizing: border-box;
 }
 
 /* .sidebar { */
