@@ -21,13 +21,13 @@ function createGrid(gridSize = 50) {
 }
 
 function changeBg (element) {
-	element.style.backgroundColor = 'lightcoral';
-	// element.style.border = "0.1px solid cyan";
+	element.style.backgroundColor = bg;
 }
 
 // https://gomakethings.com/why-you-shouldnt-attach-event-listeners-in-a-for-loop-with-vanilla-javascript/
 // https://gomakethings.com/why-event-delegation-is-a-better-way-to-listen-for-events-in-vanilla-js/
 function draw(event) {
+	// if (rainbow) bg = rng();
 	if (event.target.matches('.square')) {
 		changeBg(event.target);
 	}
@@ -35,12 +35,14 @@ function draw(event) {
 
 function toggle(event) {
 	if (drawing && event.target.matches('.square')) {
+		document.body.style.cursor = "default";
 		drawing = false;
 		document.removeEventListener('mouseover', draw);
 	} else if (event.target.matches('.square')) {
+		bg === "transparent" ? document.body.style.cursor = "pointer" : document.body.style.cursor = "crosshair";
 		document.addEventListener('mouseover', draw);
 		drawing = true;
-		event.target.style.backgroundColor = 'lightcoral';
+		event.target.style.backgroundColor = bg;
 	}
 }
 
@@ -71,6 +73,7 @@ createGrid();
 let squares = document.getElementsByClassName('square');
 let menu = document.getElementsByClassName('floating-menu')[0];	
 let drawing = false;
+let bg = "lightcoral";
 
 document.addEventListener('click', toggle);
 
@@ -87,7 +90,34 @@ const cSlider = document.getElementById('change');
 cSlider.addEventListener('change', newGrid); // 'input' to continuously change grid
 const sliderValue = document.getElementById('slider-value');
 sliderValue.textContent = `${cSlider.value}x${cSlider.value}`;
+
 cSlider.addEventListener('input', () => {
 	sliderValue.textContent = `${cSlider.value}x${cSlider.value}`;
 })
+
+
+
+
+// TODO Color picker, Eraser, Rainbow-mode, Background picker TODO
+
+const eraser = document.getElementById('eraser');
+eraser.addEventListener('click', erase);
+
+function erase() {
+	if (bg === "transparent") {
+		bg = color.value;
+		document.body.style.cursor = "default";
+	} else {
+	bg = "transparent";
+	document.body.style.cursor = "pointer";
+	}
+}
+
+
+const color = document.getElementById('color');
+color.addEventListener('change', (e) => bg = e.target.value);
+color.addEventListener('click', function () {bg = color.value; document.body.style.cursor = "crosshair"});
+
+
+
 

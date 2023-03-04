@@ -8,18 +8,22 @@
 		<script src="scripts/app.js" defer></script>
 	</head>
 	<body>
-		<!-- <div class="sidebar"> -->
-		<!-- 	<input type="range" min="16" max="120" value="64"> -->
-		<!-- </div> -->
-		<div>	
-			<div class="container-m">
-				<div class="floating-menu">
+		<div class="container-m">
+			<div class="floating-menu">
+				<div class="menu-div-left">
+					<button type="checkbox" id="eraser">✏️</button>
+					<input type="color" id="color" value="#F08080">
+				</div>
+				<div class="menu-div-mid">
 					<button type="button" id="reset"><s>🎨</s></button>
 					<div class="slider-div">
 						<input type="range" min="1" max="100" step="1" value="50" id="change">
 						<p id=slider-value></p>
 					</div>
 					<button type="button" id="exit">❌</button>
+				</div>
+				<div class="menu-div-right">
+					
 				</div>
 			</div>
 		</div>
