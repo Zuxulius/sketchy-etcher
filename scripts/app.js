@@ -69,6 +69,7 @@ let rainbow = true;
 let bg = "";
 
 document.addEventListener('click', toggle);
+document.addEventListener('mouseover', draw);
 
 // Popupmenu
 function popup(event) {

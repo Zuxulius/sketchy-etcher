@@ -62,14 +62,17 @@ body {
 #default {
 	background: rgb(67,34,195);
 	background: radial-gradient(circle, rgba(67,34,195,0.08869485294117652) 0%, rgba(236,253,45,0.20073967086834732) 100%);;
+	font-size: 1vw;
 }
 
 #white {
 	background-color: white;
+	font-size: 1vw;
 }
 
 #black {
 	background-color: black;
+	font-size: 1vw;
 }
 .menu-div-mid {
 	height: 50vh;
@@ -100,13 +103,14 @@ body {
 }
 
 #reset {
-	font-size: 3vw;
+	font-size: 1vw;
 }
 
 #eraser {
 	cursor: pointer;
 	font-size: 2vw;
-	transform: rotate(270deg);
+	transform: rotate(90deg);
+	text-decoration-line: line-through;
 }
 
 #rainbow {
@@ -133,4 +137,5 @@ body {
 #slider-value {
 	color: lightseagreen;
 }
+
 
