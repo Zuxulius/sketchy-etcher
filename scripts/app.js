@@ -33,13 +33,14 @@ function draw(event) {
 	}
 }
 
-function toggle() {
+function toggle(event) {
 	if (drawing && event.target.matches('.square')) {
 		drawing = false;
 		document.removeEventListener('mouseover', draw);
 	} else if (event.target.matches('.square')) {
 		document.addEventListener('mouseover', draw);
 		drawing = true;
+		event.target.style.backgroundColor = 'lightcoral';
 	}
 }
 
@@ -85,8 +86,8 @@ eButton.addEventListener('mousedown', () => {menu.style.display = "none"});
 const cSlider = document.getElementById('change');
 cSlider.addEventListener('change', newGrid);
 const sliderValue = document.getElementById('slider-value');
-sliderValue.textContent = `${cSlider.value}/100`;
+sliderValue.textContent = `${cSlider.value}x${cSlider.value}`;
 cSlider.addEventListener('input', () => {
-	sliderValue.textContent = `${cSlider.value}/100`;
+	sliderValue.textContent = `${cSlider.value}x${cSlider.value}`;
 })
 
