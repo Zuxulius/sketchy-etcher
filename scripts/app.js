@@ -27,7 +27,7 @@ function changeBg (element) {
 // https://gomakethings.com/why-you-shouldnt-attach-event-listeners-in-a-for-loop-with-vanilla-javascript/
 // https://gomakethings.com/why-event-delegation-is-a-better-way-to-listen-for-events-in-vanilla-js/
 function draw(event) {
-	// if (rainbow) bg = rng();
+	if (rainbow) bg = rng();
 	if (event.target.matches('.square')) {
 		changeBg(event.target);
 	}
@@ -73,7 +73,9 @@ createGrid();
 let squares = document.getElementsByClassName('square');
 let menu = document.getElementsByClassName('floating-menu')[0];	
 let drawing = false;
+let rainbow = false;
 let bg = "lightcoral";
+let states = document.getElementsByClassName('states');
 
 document.addEventListener('click', toggle);
 
@@ -95,29 +97,69 @@ cSlider.addEventListener('input', () => {
 	sliderValue.textContent = `${cSlider.value}x${cSlider.value}`;
 })
 
-
-
-
-// TODO Color picker, Eraser, Rainbow-mode, Background picker TODO
-
 const eraser = document.getElementById('eraser');
 eraser.addEventListener('click', erase);
 
 function erase() {
 	if (bg === "transparent") {
+		eraser.style.boxShadow = "";
 		bg = color.value;
+		rainbow = false;
 		document.body.style.cursor = "default";
 	} else {
-	bg = "transparent";
-	document.body.style.cursor = "pointer";
+		eraser.style.boxShadow = "inset 0px 0px 3px 3px #ccc";
+		bg = "transparent";
+		document.body.style.cursor = "pointer";
+		rainbow = false;
 	}
 }
 
-
 const color = document.getElementById('color');
 color.addEventListener('change', (e) => bg = e.target.value);
-color.addEventListener('click', function () {bg = color.value; document.body.style.cursor = "crosshair"});
+color.addEventListener('click', function () {
+	states[0].style.boxShadow =""; //eraser
+	states[1].style.boxShadow =""; //rainbow
+	bg = color.value; 
+	document.body.style.cursor = "crosshair";
+	rainbow = false;
 
+});
 
+function rainbowOn() {
+	if (rainbow) {
+		rainbowB.style.boxShadow = "";
+		rainbow = false;
+		bg = color.value;
+	}
+	else {
+		rainbowB.style.boxShadow = "inset 0px 0px 3px 3px #ccc";
+		rainbow = true; 
+		document.body.style.cursor = "crosshair"; 
+		bg = rng();};
+}
 
+function rng() {
+	let r,b,g;
+	r = Math.floor(Math.random() * 255);
+	b = Math.floor(Math.random() * 255);
+	g = Math.floor(Math.random() * 255);
+	return `rgb(${r}, ${b}, ${g})`
+}
 
+const rainbowB = document.getElementById('rainbow');
+rainbowB.addEventListener('click', rainbowOn);
+// Shadows eraser/rainbow/color based on which one is active
+
+const defaultBg = "background: rgb(67,34,195) radial-gradient(circle, rgba(67,34,195,0.08869485294117652) 0%, rgba(236,253,45,0.20073967086834732) 100%);"
+
+function setBg(event) {
+	console.log(event.target);
+	if (event.target.id === "default") {
+		document.body.style.setProperty("background", "rgb(67,34,195)"); 
+		document.body.style.setProperty("background", "radial-gradient(circle, rgba(67,34,195,0.08869485294117652) 0%, rgba(236,253,45,0.20073967086834732) 100%)");
+	}
+	if (event.target.id === "white") document.body.style.background = "white";
+	if (event.target.id === "black") document.body.style.background = "black";
+}
+const submenu = document.getElementsByClassName('menu-div-right')[0];
+submenu.addEventListener('click', setBg);

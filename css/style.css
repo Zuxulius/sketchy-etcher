@@ -39,6 +39,37 @@ body {
 	justify-content: space-around;
 }
 
+.menu-div-right {
+	height: 50vh;
+	width: 50vw;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.menu-div-right > button {
+	width: 10%;
+	height: 10%;
+}
+
+.menu-div-right > button:hover {
+	transition: 200ms ease;
+	box-shadow: 3px 6px #ccc;
+}
+
+#default {
+	background: rgb(67,34,195);
+	background: radial-gradient(circle, rgba(67,34,195,0.08869485294117652) 0%, rgba(236,253,45,0.20073967086834732) 100%);;
+}
+
+#white {
+	background-color: white;
+}
+
+#black {
+	background-color: black;
+}
 .menu-div-mid {
 	height: 50vh;
 	width: 50vw;
@@ -77,6 +108,10 @@ body {
 	transform: rotate(270deg);
 }
 
+#rainbow {
+	font-size: 1vw;
+}
+
 #color {
 	transition: 400ms ease;
 	opacity: 0.8;
@@ -95,3 +130,4 @@ body {
 #slider-value {
 	color: lightseagreen;
 }
+
