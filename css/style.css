@@ -13,11 +13,11 @@ body {
 }
 
 .floating-menu {
-	display: flex;
+	display: none;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
-	visibility: hidden;
+	justify-content: space-around;
+	/* visibility: hidden; */
 	transition: 400ms;
 	border: darkgoldenrod solid;
 	border-radius: 5%;
@@ -39,4 +39,8 @@ body {
 
 .floating-menu:hover ~ .container > .square {
 	border: 0.1px lightslategrey dotted;
+}
+
+.slider-div {
+	display: flex;
 }

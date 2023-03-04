@@ -56,17 +56,16 @@ function newGrid(event) {
 }
 
 
-function popup() {
+function popup(event) {
 	event.preventDefault();
-	if (menu.style.visibility !== "visible") {
-		menu.style.visibility = "visible";
-	} else menu.style.visibility = "hidden";
-	// let menu = document.createElement('div');
-	// menu.className = "floating-menu";
-	// document.getElementsByClassName('container-m')[0].appendChild(menu);	
+	if (menu.style.display !== "flex") {
+		menu.style.display = "flex";
+	} else {
+		menu.style.display = "none";
+	}
 }
 
-createGrid(4);
+createGrid(16);
 
 let squares = document.getElementsByClassName('square');
 let menu = document.getElementsByClassName('floating-menu')[0];	
@@ -80,11 +79,14 @@ document.addEventListener('contextmenu', popup);
 const rButton = document.getElementById('reset');
 rButton.addEventListener('click', reset);
 
+const eButton = document.getElementById('exit');
+eButton.addEventListener('mousedown', () => {menu.style.display = "none"});
+
 const cSlider = document.getElementById('change');
 cSlider.addEventListener('change', newGrid);
 const sliderValue = document.getElementById('slider-value');
-sliderValue.textContent = cSlider.value;
+sliderValue.textContent = `${cSlider.value}/100`;
 cSlider.addEventListener('input', () => {
-	sliderValue.textContent = cSlider.value;
+	sliderValue.textContent = `${cSlider.value}/100`;
 })
 
