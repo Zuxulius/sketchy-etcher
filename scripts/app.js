@@ -59,6 +59,18 @@ function newGrid(event) {
 }
 
 
+
+createGrid();
+
+let squares = document.getElementsByClassName('square');
+let menu = document.getElementsByClassName('floating-menu')[0];	
+let drawing = false;
+let rainbow = true;
+let bg = "";
+
+document.addEventListener('click', toggle);
+
+// Popupmenu
 function popup(event) {
 	event.preventDefault();
 	if (menu.style.display !== "flex") {
@@ -68,28 +80,19 @@ function popup(event) {
 	}
 }
 
-createGrid();
-
-let squares = document.getElementsByClassName('square');
-let menu = document.getElementsByClassName('floating-menu')[0];	
-let drawing = false;
-let rainbow = false;
-let bg = "lightcoral";
-let states = document.getElementsByClassName('states');
-
-document.addEventListener('click', toggle);
-
-// Popupmenu and its contents
 document.addEventListener('contextmenu', popup);
 
+// Reset
 const rButton = document.getElementById('reset');
 rButton.addEventListener('click', reset);
 
+// Exit button
 const eButton = document.getElementById('exit');
 eButton.addEventListener('mousedown', () => {menu.style.display = "none"});
 
+// Gridsize slider
 const cSlider = document.getElementById('change');
-cSlider.addEventListener('change', newGrid); // 'input' to continuously change grid
+cSlider.addEventListener('input', newGrid); // 'input' = continuous gridchange, 'change' = after release
 const sliderValue = document.getElementById('slider-value');
 sliderValue.textContent = `${cSlider.value}x${cSlider.value}`;
 
@@ -97,42 +100,39 @@ cSlider.addEventListener('input', () => {
 	sliderValue.textContent = `${cSlider.value}x${cSlider.value}`;
 })
 
+// Eraser
 const eraser = document.getElementById('eraser');
 eraser.addEventListener('click', erase);
 
 function erase() {
 	if (bg === "transparent") {
-		eraser.style.boxShadow = "";
 		bg = color.value;
 		rainbow = false;
 		document.body.style.cursor = "default";
 	} else {
-		eraser.style.boxShadow = "inset 0px 0px 3px 3px #ccc";
 		bg = "transparent";
 		document.body.style.cursor = "pointer";
 		rainbow = false;
 	}
 }
 
+// Color picker
 const color = document.getElementById('color');
 color.addEventListener('change', (e) => bg = e.target.value);
 color.addEventListener('click', function () {
-	states[0].style.boxShadow =""; //eraser
-	states[1].style.boxShadow =""; //rainbow
 	bg = color.value; 
 	document.body.style.cursor = "crosshair";
 	rainbow = false;
 
 });
 
+// Rainbow mode
 function rainbowOn() {
 	if (rainbow) {
-		rainbowB.style.boxShadow = "";
 		rainbow = false;
 		bg = color.value;
 	}
 	else {
-		rainbowB.style.boxShadow = "inset 0px 0px 3px 3px #ccc";
 		rainbow = true; 
 		document.body.style.cursor = "crosshair"; 
 		bg = rng();};
@@ -148,10 +148,8 @@ function rng() {
 
 const rainbowB = document.getElementById('rainbow');
 rainbowB.addEventListener('click', rainbowOn);
-// Shadows eraser/rainbow/color based on which one is active
 
-const defaultBg = "background: rgb(67,34,195) radial-gradient(circle, rgba(67,34,195,0.08869485294117652) 0%, rgba(236,253,45,0.20073967086834732) 100%);"
-
+// Backgrounds
 function setBg(event) {
 	console.log(event.target);
 	if (event.target.id === "default") {
@@ -163,3 +161,4 @@ function setBg(event) {
 }
 const submenu = document.getElementsByClassName('menu-div-right')[0];
 submenu.addEventListener('click', setBg);
+
