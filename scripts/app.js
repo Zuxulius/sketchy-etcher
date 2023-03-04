@@ -1,5 +1,5 @@
 
-function createGrid(gridSize = 16) {
+function createGrid(gridSize = 50) {
 	let squareSize = 100/gridSize;
 	let grid = document.getElementsByClassName("container-m")[0];
 	grid.style = "width: 100vw; height: 100vw;"
@@ -66,7 +66,7 @@ function popup(event) {
 	}
 }
 
-createGrid(16);
+createGrid();
 
 let squares = document.getElementsByClassName('square');
 let menu = document.getElementsByClassName('floating-menu')[0];	
@@ -84,7 +84,7 @@ const eButton = document.getElementById('exit');
 eButton.addEventListener('mousedown', () => {menu.style.display = "none"});
 
 const cSlider = document.getElementById('change');
-cSlider.addEventListener('change', newGrid);
+cSlider.addEventListener('change', newGrid); // 'input' to continuously change grid
 const sliderValue = document.getElementById('slider-value');
 sliderValue.textContent = `${cSlider.value}x${cSlider.value}`;
 cSlider.addEventListener('input', () => {
