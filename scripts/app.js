@@ -1,8 +1,5 @@
 
-const index = document.body.innerHTML;
-
-function createGrid(nGrid = 16) {
-	let gridSize = nGrid;
+function createGrid(gridSize = 16) {
 	let squareSize = 100/gridSize;
 	let grid = document.getElementsByClassName("container-m")[0];
 	grid.style = "width: 100vw; height: 100vw;"
@@ -52,9 +49,10 @@ function reset() {
 	}
 }
 
-function newGrid(nGrid) {
-	document.body.innerHTML = index;
-	createGrid(nGrid);
+function newGrid(event) {
+	let containers = document.getElementsByClassName('container');
+	Array.from(containers).forEach(container => container.remove());
+	createGrid(event.target.value);
 }
 
 
@@ -68,17 +66,25 @@ function popup() {
 	// document.getElementsByClassName('container-m')[0].appendChild(menu);	
 }
 
-createGrid(64);
+createGrid(4);
 
 let squares = document.getElementsByClassName('square');
 let menu = document.getElementsByClassName('floating-menu')[0];	
 let drawing = false;
 
 document.addEventListener('click', toggle);
+
+// Popupmenu and its contents
 document.addEventListener('contextmenu', popup);
 
-rButton = document.getElementById('reset');
+const rButton = document.getElementById('reset');
 rButton.addEventListener('click', reset);
-cButton = document.getElementById('change');
-cButton.addEventListener('click', newGrid);
+
+const cSlider = document.getElementById('change');
+cSlider.addEventListener('change', newGrid);
+const sliderValue = document.getElementById('slider-value');
+sliderValue.textContent = cSlider.value;
+cSlider.addEventListener('input', () => {
+	sliderValue.textContent = cSlider.value;
+})
 

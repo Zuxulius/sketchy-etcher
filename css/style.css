@@ -33,6 +33,10 @@ body {
 }
 
 .floating-menu:hover {
-	transition: 200ms;
+	transition: 400ms ease;
 	border-radius: 15%;
+}
+
+.floating-menu:hover ~ .container > .square {
+	border: 0.1px lightslategrey dotted;
 }
