@@ -1,4 +1,27 @@
 
+// function createDefaultGrid(gridSize = 50, colors = []) {
+// 	let squareSize = 100/gridSize;
+// 	let grid = document.getElementsByClassName("container-m")[0];
+// 	grid.style = "width: 100vw; height: 100vw;"
+// 	let colorIndex = 0;
+//
+// 	for (let i=0;i<gridSize;i++) {
+// 		let container = document.createElement('div');
+// 		container.style = "display: flex; width: 100%;";
+// 		container.className = "container";
+// 		container.id = i;
+// 		grid.appendChild(container);
+//
+// 		for (let j=0;j<gridSize;j++) {
+// 			let div = document.createElement('div');
+// 			div.className = "square";
+// 			div.style = `height: ${squareSize}vw; width: ${squareSize}vw; background-color: ${colors[colorIndex]};`
+// 			document.getElementById(i).appendChild(div);
+// 			colorIndex++;
+// 		}
+// 	}
+// }
+
 function createGrid(gridSize = 50) {
 	let squareSize = 100/gridSize;
 	let grid = document.getElementsByClassName("container-m")[0];
@@ -57,10 +80,6 @@ function newGrid(event) {
 	Array.from(containers).forEach(container => container.remove());
 	createGrid(event.target.value);
 }
-
-
-
-createGrid();
 
 let squares = document.getElementsByClassName('square');
 let menu = document.getElementsByClassName('floating-menu')[0];	
@@ -163,3 +182,7 @@ function setBg(event) {
 const submenu = document.getElementsByClassName('menu-div-right')[0];
 submenu.addEventListener('click', setBg);
 
+// import { defaultGrid } from "./welcome.js";
+// createDefaultGrid(50, defaultGrid);
+
+createGrid();

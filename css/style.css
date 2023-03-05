@@ -122,11 +122,10 @@ body {
 	outline: none;
 	overflow: hidden;
 	border: none;
-	border-radius: 100%;
 	transition: 400ms ease;
 	opacity: 0.8;
-	height: 2vw;
-	width: 3vw;
+	height: 4vw;
+	width: 6vw;
 }
 
 #color:hover {
