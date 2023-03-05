@@ -1,26 +1,26 @@
 
-// function createDefaultGrid(gridSize = 50, colors = []) {
-// 	let squareSize = 100/gridSize;
-// 	let grid = document.getElementsByClassName("container-m")[0];
-// 	grid.style = "width: 100vw; height: 100vw;"
-// 	let colorIndex = 0;
-//
-// 	for (let i=0;i<gridSize;i++) {
-// 		let container = document.createElement('div');
-// 		container.style = "display: flex; width: 100%;";
-// 		container.className = "container";
-// 		container.id = i;
-// 		grid.appendChild(container);
-//
-// 		for (let j=0;j<gridSize;j++) {
-// 			let div = document.createElement('div');
-// 			div.className = "square";
-// 			div.style = `height: ${squareSize}vw; width: ${squareSize}vw; background-color: ${colors[colorIndex]};`
-// 			document.getElementById(i).appendChild(div);
-// 			colorIndex++;
-// 		}
-// 	}
-// }
+function createDefaultGrid(gridSize = 100, colors = []) {
+	let squareSize = 100/gridSize;
+	let grid = document.getElementsByClassName("container-m")[0];
+	grid.style = "width: 100vw; height: 100vw;"
+	let colorIndex = 0;
+
+	for (let i=0;i<gridSize;i++) {
+		let container = document.createElement('div');
+		container.style = "display: flex; width: 100%;";
+		container.className = "container";
+		container.id = i;
+		grid.appendChild(container);
+
+		for (let j=0;j<gridSize;j++) {
+			let div = document.createElement('div');
+			div.className = "square";
+			div.style = `height: ${squareSize}vw; width: ${squareSize}vw; background-color: ${colors[colorIndex]};`
+			document.getElementById(i).appendChild(div);
+			colorIndex++;
+		}
+	}
+}
 
 function createGrid(gridSize = 50) {
 	let squareSize = 100/gridSize;
@@ -191,7 +191,7 @@ submenuB.addEventListener('click', function(event) {
 	else if (event.target.id === 'color') {rainbowB.style.backgroundColor = 'white'; eraser.style.backgroundColor = 'white'};
 })
 
-// import { defaultGrid } from "./welcome.js";
-// createDefaultGrid(50, defaultGrid);
+import { defaultGrid } from "./welcome.js";
+createDefaultGrid(100, defaultGrid);
 
-createGrid();
+// createGrid();
