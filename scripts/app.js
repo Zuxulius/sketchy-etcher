@@ -171,7 +171,6 @@ rainbowB.addEventListener('click', rainbowOn);
 
 // Backgrounds
 function setBg(event) {
-	console.log(event.target);
 	if (event.target.id === "default") {
 		document.body.style.setProperty("background", "rgb(67,34,195)"); 
 		document.body.style.setProperty("background", "radial-gradient(circle, rgba(67,34,195,0.08869485294117652) 0%, rgba(236,253,45,0.20073967086834732) 100%)");
@@ -181,6 +180,16 @@ function setBg(event) {
 }
 const submenu = document.getElementsByClassName('menu-div-right')[0];
 submenu.addEventListener('click', setBg);
+
+// Button focusing
+const submenuB = document.getElementsByClassName('menu-div-left')[0];
+submenuB.addEventListener('click', function(event) {
+	if (event.target.matches('.states')) {
+		event.target.style.backgroundColor === 'darkorange' ? event.target.style.backgroundColor = 'white' : event.target.style.backgroundColor = "darkorange";
+		}
+	if (event.target.id === 'eraser') {rainbowB.style.backgroundColor = 'white';} else if (event.target.id === "rainbow") {eraser.style.backgroundColor = 'white'}
+	else if (event.target.id === 'color') {rainbowB.style.backgroundColor = 'white'; eraser.style.backgroundColor = 'white'};
+})
 
 // import { defaultGrid } from "./welcome.js";
 // createDefaultGrid(50, defaultGrid);
