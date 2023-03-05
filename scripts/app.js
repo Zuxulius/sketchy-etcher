@@ -1,3 +1,12 @@
+// A possible saving mechanism
+// function getCurrentGrid() {
+// 	const colorArray = [];
+// 	const cells = document.querySelectorAll('.square');
+// 	cells.forEach(cell => {
+// 		colorArray.push(cell.style.backgroundColor);
+// 	});
+// 	console.log(colorArray);
+// }
 
 function createDefaultGrid(gridSize = 100, colors = []) {
 	let squareSize = 100/gridSize;
@@ -191,6 +200,8 @@ submenuB.addEventListener('click', function(event) {
 	else if (event.target.id === 'color') {rainbowB.style.backgroundColor = 'white'; eraser.style.backgroundColor = 'white'};
 })
 
+// Initialize starting conditions
+rainbowB.style.backgroundColor = "darkorange";
 import { defaultGrid } from "./welcome.js";
 createDefaultGrid(100, defaultGrid);
 
