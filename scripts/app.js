@@ -8,7 +8,7 @@
 // 	console.log(colorArray);
 // }
 
-function createDefaultGrid(gridSize = 100, colors = []) {
+function createDefaultGrid(gridSize = 50, colors = []) {
 	let squareSize = 100/gridSize;
 	let grid = document.getElementsByClassName("container-m")[0];
 	grid.style = "width: 100vw; height: 100vw;"
@@ -203,6 +203,106 @@ submenuB.addEventListener('click', function(event) {
 // Initialize starting conditions
 rainbowB.style.backgroundColor = "darkorange";
 import { defaultGrid } from "./welcome.js";
-createDefaultGrid(100, defaultGrid);
+// createDefaultGrid(50, defaultGrid);
 
 // createGrid();
+
+
+// ChatGPT codes game of life
+//TODO TODO TODO TODO
+
+function initializeGameOfLife(gridSize = 50, probability = 0.3) {
+  let cellState = new Array(gridSize);
+  for (let i = 0; i < gridSize; i++) {
+    cellState[i] = new Array(gridSize).fill(0);
+  }
+
+  // Initialize the grid with random cell states
+  for (let i = 0; i < gridSize; i++) {
+    for (let j = 0; j < gridSize; j++) {
+      cellState[i][j] = Math.random() < probability ? 1 : 0;
+    }
+  }
+
+  createGrid(gridSize); // assuming you have already defined the createGrid function
+
+  // Update the cell colors based on the initial state
+  let cells = document.getElementsByClassName("square");
+  for (let i = 0; i < cells.length; i++) {
+    let row = cells[i].parentNode.id;
+    let col = Array.from(cells[i].parentNode.children).indexOf(cells[i]);
+    if (cellState[row][col] === 1) {
+      cells[i].style.backgroundColor = color.value;
+    } else {
+      cells[i].style.backgroundColor = 'transparent';
+    }
+    cells[i].dataset.state = cellState[row][col];
+  }
+
+  return cellState;
+}
+
+function updateGameOfLife(cellState, gridSize = 50, speed = 100) {
+  let lastTime = 0;
+  function step(timestamp) {
+    if (timestamp - lastTime > speed) {
+      // Copy the current state to a new array
+      let newCellState = JSON.parse(JSON.stringify(cellState));
+      
+      // Update the state of each cell based on its neighbors
+      for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+          let aliveNeighbors = 0;
+          for (let x = -1; x <= 1; x++) {
+            for (let y = -1; y <= 1; y++) {
+              if (x === 0 && y === 0) {
+                continue;
+              }
+              let neighborRow = i + x;
+              let neighborCol = j + y;
+              if (neighborRow < 0) {
+                neighborRow = gridSize - 1;
+              } else if (neighborRow >= gridSize) {
+                neighborRow = 0;
+              }
+              if (neighborCol < 0) {
+                neighborCol = gridSize - 1;
+              } else if (neighborCol >= gridSize) {
+                neighborCol = 0;
+              }
+              aliveNeighbors += cellState[neighborRow][neighborCol];
+            }
+          }
+          if (cellState[i][j] === 1 && (aliveNeighbors < 2 || aliveNeighbors > 3)) {
+            newCellState[i][j] = 0; // Any live cell with fewer than two live neighbours or more than three live neighbours dies
+          } else if (cellState[i][j] === 0 && aliveNeighbors === 3) {
+            newCellState[i][j] = 1; // Any dead cell with exactly three live neighbours becomes a live cell
+          }
+        }
+      }
+
+      // Update the colors of the cells based on the new state
+      let cells = document.getElementsByClassName("square");
+      for (let i = 0; i < cells.length; i++) {
+        let row = cells[i].parentNode.id;
+        let col = Array.from(cells[i].parentNode.children).indexOf(cells[i]);
+        if (newCellState[row][col] === 1) {
+          cells[i].style.backgroundColor = color.value;
+        } else {
+          cells[i].style.backgroundColor = 'transparent';
+        }
+        cells[i].dataset.state = newCellState[row][col];
+      }
+
+      // Update the cell state variable to the new state
+      cellState = newCellState;
+      lastTime = timestamp;
+    }
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+let gridSize = cSlider.value;
+let cellState = initializeGameOfLife(gridSize, 0.2);
+updateGameOfLife(cellState, gridSize, 100);
