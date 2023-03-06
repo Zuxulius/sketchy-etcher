@@ -90,14 +90,6 @@ function newGrid(event) {
 	createGrid(event.target.value);
 }
 
-let squares = document.getElementsByClassName('square');
-let menu = document.getElementsByClassName('floating-menu')[0];	
-let drawing = false;
-let rainbow = true;
-let bg = "";
-
-document.addEventListener('click', toggle);
-document.addEventListener('mouseover', draw);
 
 // Popupmenu
 function popup(event) {
@@ -201,8 +193,15 @@ submenuB.addEventListener('click', function(event) {
 })
 
 // Initialize starting conditions
-rainbowB.style.backgroundColor = "darkorange";
-import { defaultGrid } from "./welcome.js";
+let squares = document.getElementsByClassName('square');
+let menu = document.getElementsByClassName('floating-menu')[0];	
+let drawing = false;
+let rainbow = false;
+let bg = color.value;
+
+document.addEventListener('click', toggle);
+document.addEventListener('mouseover', draw);
+// import { defaultGrid } from "./welcome.js";
 // createDefaultGrid(50, defaultGrid);
 
 // createGrid();
@@ -245,6 +244,7 @@ function initializeGameOfLife(gridSize = 50, probability = 0.3) {
 function updateGameOfLife(cellState, gridSize = 50, speed = 100) {
   let lastTime = 0;
   function step(timestamp) {
+	  	if (!playing) return
     if (timestamp - lastTime > speed) {
       // Copy the current state to a new array
       let newCellState = JSON.parse(JSON.stringify(cellState));
@@ -287,7 +287,7 @@ function updateGameOfLife(cellState, gridSize = 50, speed = 100) {
         let row = cells[i].parentNode.id;
         let col = Array.from(cells[i].parentNode.children).indexOf(cells[i]);
         if (newCellState[row][col] === 1) {
-          cells[i].style.backgroundColor = color.value;
+          rainbow ? cells[i].style.backgroundColor = rng() : cells[i].style.backgroundColor = color.value;
         } else {
           cells[i].style.backgroundColor = 'transparent';
         }
@@ -303,6 +303,24 @@ function updateGameOfLife(cellState, gridSize = 50, speed = 100) {
   requestAnimationFrame(step);
 }
 
-let gridSize = cSlider.value;
-let cellState = initializeGameOfLife(gridSize, 0.3);
-updateGameOfLife(cellState, gridSize, 100);
+function toggleGame(event) {
+	if (event.keyCode === 32 || event.key === ' ') {
+		event.preventDefault();
+		if (!playing) {
+			let containers = document.getElementsByClassName('container');
+			Array.from(containers).forEach(container => container.remove());
+			playing = true;
+			let gridSize = cSlider.value;
+			let cellState = initializeGameOfLife(gridSize, 0.3);
+			updateGameOfLife(cellState, gridSize, 100);
+		} else playing = false;
+	}
+}
+
+let playing = true;
+document.body.addEventListener('keydown', toggleGame);
+let gridSize = 50;
+let cellState = initializeGameOfLife(gridSize, 0.175);
+updateGameOfLife(cellState, gridSize, 75);
+
+
