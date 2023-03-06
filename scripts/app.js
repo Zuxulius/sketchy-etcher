@@ -303,6 +303,20 @@ function updateGameOfLife(cellState, gridSize = 50, speed = 100) {
   requestAnimationFrame(step);
 }
 
+function readGrid(gridSize) {
+  let cellState = new Array(gridSize);
+  for (let i = 0; i < gridSize; i++) {
+    cellState[i] = new Array(gridSize).fill(0);
+  }
+  let cells = document.getElementsByClassName("square");
+  for (let i = 0; i < cells.length; i++) {
+    let row = cells[i].parentNode.id;
+    let col = Array.from(cells[i].parentNode.children).indexOf(cells[i]);
+    cellState[row][col] = cells[i].style.backgroundColor === 'transparent' ? 0 : 1;
+  }
+  return cellState;
+}
+
 function toggleGame(event) {
 	if (event.keyCode === 32 || event.key === ' ') {
 		event.preventDefault();
@@ -323,12 +337,25 @@ let gridSize = 50;
 let cellState = initializeGameOfLife(gridSize, 0.175);
 updateGameOfLife(cellState, gridSize, 75);
 
+function playGame(event) {
+	if (event.keyCode === 13) {
+		playing = true;
+		event.preventDefault();
+		let cellState = readGrid(gridSize);
+		updateGameOfLife(cellState);
+
+	}
+}
+
+document.body.addEventListener('keydown', playGame);
+
+
 // Popup only first visit
 if (!localStorage.getItem('popupShown')) {
 	// If not, show the popup
 	Swal.fire({
-	  title: "I'm not on the left, i'm not in the middle. When you give me a click, you'll solve this riddle.\n\nJump, skip, pause or play, you use me for this every day.",
-	  confirmButtonText: "Right-click and spacebar, gotcha."
+		title: "Right-click = Open/close menu\n\nSpacebar = Pause/Spawn new game of life\n\nEnter = Play game of life with current canvas",
+	  confirmButtonText: "Experiment and have fun!"
 	})
 	// Set a flag in localStorage to indicate that the popup has been shown
 	localStorage.setItem('popupShown', true);
