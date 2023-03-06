@@ -304,5 +304,5 @@ function updateGameOfLife(cellState, gridSize = 50, speed = 100) {
 }
 
 let gridSize = cSlider.value;
-let cellState = initializeGameOfLife(gridSize, 0.2);
+let cellState = initializeGameOfLife(gridSize, 0.3);
 updateGameOfLife(cellState, gridSize, 100);
