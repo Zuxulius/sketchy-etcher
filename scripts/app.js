@@ -323,4 +323,13 @@ let gridSize = 50;
 let cellState = initializeGameOfLife(gridSize, 0.175);
 updateGameOfLife(cellState, gridSize, 75);
 
-
+// Popup only first visit
+if (!localStorage.getItem('popupShown')) {
+	// If not, show the popup
+	Swal.fire({
+	  title: "I'm not on the left, i'm not in the middle. When you give me a click, you'll solve this riddle.\n\nJump, skip, pause or play, you use me for this every day.",
+	  confirmButtonText: "Right-click and spacebar, gotcha."
+	})
+	// Set a flag in localStorage to indicate that the popup has been shown
+	localStorage.setItem('popupShown', true);
+}
