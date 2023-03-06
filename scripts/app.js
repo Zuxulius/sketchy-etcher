@@ -46,7 +46,8 @@ function createGrid(gridSize = 50) {
 		for (let j=0;j<gridSize;j++) {
 			let div = document.createElement('div');
 			div.className = "square";
-			div.style = `height: ${squareSize}vw; width: ${squareSize}vw;`
+			div.style.backgroundColor = "transparent";
+			div.style = `background-color: transparent; height: ${squareSize}vw; width: ${squareSize}vw;`
 			document.getElementById(i).appendChild(div);
 		}
 	}
@@ -341,8 +342,9 @@ function playGame(event) {
 	if (event.keyCode === 13) {
 		playing = true;
 		event.preventDefault();
+		gridSize = cSlider.value;
 		let cellState = readGrid(gridSize);
-		updateGameOfLife(cellState);
+		updateGameOfLife(cellState, gridSize);
 
 	}
 }
