@@ -211,7 +211,7 @@ document.addEventListener('mouseover', draw);
 // ChatGPT codes game of life
 //TODO TODO TODO TODO
 
-function initializeGameOfLife(gridSize = 50, probability = 0.3) {
+function initializeGameOfLife(gridSize = 50, probability = 0.125) {
   let cellState = new Array(gridSize);
   for (let i = 0; i < gridSize; i++) {
     cellState[i] = new Array(gridSize).fill(0);
@@ -242,7 +242,7 @@ function initializeGameOfLife(gridSize = 50, probability = 0.3) {
   return cellState;
 }
 
-function updateGameOfLife(cellState, gridSize = 50, speed = 100) {
+function updateGameOfLife(cellState, gridSize = 50, speed = 5000/gridSize) {
   let lastTime = 0;
   function step(timestamp) {
 	  	if (!playing) return
@@ -326,8 +326,8 @@ function toggleGame(event) {
 			Array.from(containers).forEach(container => container.remove());
 			playing = true;
 			let gridSize = cSlider.value;
-			let cellState = initializeGameOfLife(gridSize, 0.3);
-			updateGameOfLife(cellState, gridSize, 100);
+			let cellState = initializeGameOfLife(gridSize);
+			updateGameOfLife(cellState, gridSize);
 		} else playing = false;
 	}
 }
@@ -335,8 +335,8 @@ function toggleGame(event) {
 let playing = true;
 document.body.addEventListener('keydown', toggleGame);
 let gridSize = 50;
-let cellState = initializeGameOfLife(gridSize, 0.175);
-updateGameOfLife(cellState, gridSize, 75);
+let cellState = initializeGameOfLife(gridSize);
+updateGameOfLife(cellState, gridSize);
 
 function playGame(event) {
 	if (event.keyCode === 13) {
