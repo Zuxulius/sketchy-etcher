@@ -242,7 +242,7 @@ function initializeGameOfLife(gridSize = 50, probability = 0.125) {
   return cellState;
 }
 
-function updateGameOfLife(cellState, gridSize = 50, speed = 5000/gridSize) {
+function updateGameOfLife(cellState, gridSize = 50, speed = 5000/gridSize ) { // 5000/gridSize
   let lastTime = 0;
   function step(timestamp) {
 	  	if (!playing) return
@@ -332,11 +332,12 @@ function toggleGame(event) {
 	}
 }
 
-let playing = true;
+let playing = false;
 document.body.addEventListener('keydown', toggleGame);
 let gridSize = 50;
-let cellState = initializeGameOfLife(gridSize);
-updateGameOfLife(cellState, gridSize);
+createGrid();
+// let cellState = initializeGameOfLife(gridSize);
+// updateGameOfLife(cellState, gridSize);
 
 function playGame(event) {
 	if (event.keyCode === 13) {
@@ -352,7 +353,7 @@ function playGame(event) {
 document.body.addEventListener('keydown', playGame);
 
 
-// Popup only first visit
+// // Popup only first visit
 if (!localStorage.getItem('popupShown')) {
 	// If not, show the popup
 	Swal.fire({
